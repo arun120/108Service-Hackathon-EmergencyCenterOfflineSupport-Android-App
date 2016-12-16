@@ -35,8 +35,12 @@ public class SMSReceiver extends BroadcastReceiver {
                     String senderNum = phoneNumber;
                     String message = currentMessage.getDisplayMessageBody();
 
-                    Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
+
                     Intent intent1=new Intent(context,SMSHandler.class);
+                    message=message.substring(message.indexOf("http"));
+                    message=message.substring(0,message.indexOf(' '));
+
+                    Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
                     intent1.putExtra("msg",message);
                     context.startService(intent1);
 
